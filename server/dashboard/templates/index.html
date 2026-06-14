@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PySIEM</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="logo">PySIEM</span>
+    <span class="live-dot" title="Auto-refreshes every 5 seconds"></span>
+  </div>
+  <span class="last-updated" id="last-updated">Connecting…</span>
+</header>
+
+<main>
+
+  <!-- Severity summary cards -->
+  <div class="stats-row">
+    <div class="stat critical">
+      <span id="cnt-critical">0</span>
+      <label>Critical</label>
+    </div>
+    <div class="stat high">
+      <span id="cnt-high">0</span>
+      <label>High</label>
+    </div>
+    <div class="stat medium">
+      <span id="cnt-medium">0</span>
+      <label>Medium</label>
+    </div>
+    <div class="stat low">
+      <span id="cnt-low">0</span>
+      <label>Low</label>
+    </div>
+  </div>
+
+  <!-- Severity filter buttons -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter active" data-sev="">All</button>
+    <button class="filter critical" data-sev="critical">Critical</button>
+    <button class="filter high"     data-sev="high">High</button>
+    <button class="filter medium"   data-sev="medium">Medium</button>
+    <button class="filter low"      data-sev="low">Low</button>
+  </div>
+
+  <!-- Alert table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp (UTC)</th>
+          <th>Severity</th>
+          <th>Rule</th>
+          <th>Host</th>
+          <th>Event&nbsp;ID</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="empty-state" id="empty-state">No alerts yet — waiting for events.</p>
+  </div>
+
+</main>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

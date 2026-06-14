@@ -1,0 +1,15 @@
+id: suspicious_powershell
+name: Suspicious PowerShell Execution
+description: >
+  Detects PowerShell script block logging events (Event ID 4104) that include
+  the -EncodedCommand flag. Attackers encode commands to evade basic string
+  matching and hide payload content from casual inspection.
+severity: high
+source: windows_event_log
+conditions:
+  - field: EventID
+    operator: equals
+    value: 4104
+  - field: Message
+    operator: contains
+    value: "-EncodedCommand"

@@ -1,0 +1,11 @@
+id: failed_logon
+name: Failed Logon Attempt
+description: >
+  Detects Windows logon failures (Event ID 4625). Common indicator of
+  password spraying, brute force, or misconfigured service accounts.
+severity: medium
+source: windows_event_log
+conditions:
+  - field: EventID
+    operator: equals
+    value: 4625
