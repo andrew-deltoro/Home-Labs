@@ -1,0 +1,14 @@
+server_url: "http://localhost:5000"
+# How often (seconds) the agent collects and forwards logs
+poll_interval: 5
+# Windows Event Log channels to monitor.
+# source must match the `source` field used in your YAML detection rules.
+log_sources:
+  - channel: "Security"
+    source: "windows_event_log"
+  - channel: "System"
+    source: "windows_event_log"
+  - channel: "Microsoft-Windows-Sysmon/Operational"
+    source: "sysmon"
+# How many events to read per channel per poll cycle
+max_events_per_poll: 100

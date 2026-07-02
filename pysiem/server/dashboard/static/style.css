@@ -1,0 +1,201 @@
+/* PySIEM Dashboard — minimal dark theme
+   Severity palette: critical=red  high=orange  medium=yellow  low=blue  */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0f172a;
+  --surface:  #1e293b;
+  --border:   #334155;
+  --text:     #e2e8f0;
+  --muted:    #94a3b8;
+  --critical: #ef4444;
+  --high:     #f97316;
+  --medium:   #eab308;
+  --low:      #3b82f6;
+  --live:     #22c55e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand { display: flex; align-items: center; gap: 0.6rem; }
+
+.logo {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--live);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+.last-updated { font-size: 0.78rem; color: var(--muted); }
+
+/* ── Main layout ─────────────────────────────────────────── */
+
+main {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Severity summary cards ──────────────────────────────── */
+
+.stats-row { display: flex; gap: 0.75rem; }
+
+.stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.stat span  { font-size: 1.75rem; font-weight: 700; }
+.stat label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+
+.stat.critical span { color: var(--critical); }
+.stat.high     span { color: var(--high); }
+.stat.medium   span { color: var(--medium); }
+.stat.low      span { color: var(--low); }
+
+/* ── Filter bar ──────────────────────────────────────────── */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-label { font-size: 0.78rem; color: var(--muted); }
+
+.filter {
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.filter.active,
+.filter:hover       { color: var(--text); border-color: var(--text); }
+
+.filter.critical    { color: var(--critical); }
+.filter.critical:hover,
+.filter.critical.active { border-color: var(--critical); }
+
+.filter.high        { color: var(--high); }
+.filter.high:hover,
+.filter.high.active { border-color: var(--high); }
+
+.filter.medium          { color: var(--medium); }
+.filter.medium:hover,
+.filter.medium.active   { border-color: var(--medium); }
+
+.filter.low         { color: var(--low); }
+.filter.low:hover,
+.filter.low.active  { border-color: var(--low); }
+
+/* ── Alert table ─────────────────────────────────────────── */
+
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+thead { background: var(--bg); }
+
+th {
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+  vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+/* Severity badge inside rows */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge.critical { background: rgba(239, 68,  68,  0.15); color: var(--critical); }
+.badge.high     { background: rgba(249, 115, 22,  0.15); color: var(--high); }
+.badge.medium   { background: rgba(234, 179, 8,   0.15); color: var(--medium); }
+.badge.low      { background: rgba(59,  130, 246, 0.15); color: var(--low); }
+
+/* Monospace for technical fields (timestamp, host, event ID) */
+.mono {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Empty state shown when the table has no rows */
+.empty-state {
+  padding: 2.5rem;
+  text-align: center;
+  color: var(--muted);
+  display: none;
+}

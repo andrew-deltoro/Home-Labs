@@ -1,0 +1,12 @@
+id: new_service_installed
+name: New Service Installed
+description: >
+  Detects a new Windows service being created (Event ID 7045 from System log).
+  Malware frequently installs itself as a service for persistence. Legitimate
+  software also does this, so correlate with other signals before escalating.
+severity: medium
+source: windows_event_log
+conditions:
+  - field: EventID
+    operator: equals
+    value: 7045
